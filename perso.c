@@ -17,9 +17,9 @@ void init_perso(perso *p,vie *v)
    p->pos.y=400;
    p->num=9;
    //p->num_saut=4;
-  /* v->num=10;
+   v->num=0;//ce compteur va augmenter lorsque le personnage sera blessé (v->num)++ pour afficher l'image de la vie quand elle diminue
    v->pos.x=0;
-   v->pos.y=0;*/
+   v->pos.y=0;
    p->we9ef=NULL;
    for(i=0;i<p->num;i++)
 	{
@@ -50,12 +50,12 @@ void init_perso(perso *p,vie *v)
    for(i=0;i<p->num_saut;i++)
 	{
 	    p->saut_arr[i]=NULL;
-	}
+	}*/
 
-   for(i=0;i<v->num;i++)
+   for(i=0;i<5;i++)
 	{
 	    v->vi[i]=NULL;
-	}*/
+	}
 }
 
 void load_perso(perso *p,vie *v)
@@ -98,13 +98,13 @@ void load_perso(perso *p,vie *v)
 	{   
 	    sprintf(image,"sa%d.png",i+1);
 	    p->saut_arr[i]=IMG_Load(image);
-	}
+	}*/
 
-   for(i=0;i<v->num;i++)
+   for(i=0;i<5;i++)
 	{
 	    sprintf(image,"vie%d.png",i+1);
 	    v->vi[i]=IMG_Load(image);
-	}*/
+	}
 }
 void blit_we9ef(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
 {
@@ -117,6 +117,7 @@ void blit_we9ef(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    if(p->arriere==1)
          p->we9ef=IMG_Load("we9efa.png");
    SDL_BlitSurface(p->we9ef,NULL,ecran,&p->pos);
+   SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
    SDL_Flip(ecran);
 }
 void blit_marche_perso(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
@@ -131,6 +132,7 @@ void blit_marche_perso(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
 			   SDL_BlitSurface(fond,NULL,ecran,&pos);
 			   if(p->pos.x<590)  p->pos.x=p->pos.x+10;
 	    		   SDL_BlitSurface(p->marche_dev[i],NULL,ecran,&p->pos);
+			   SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
                            SDL_Flip(ecran);
 	                }
 		      }
@@ -141,10 +143,11 @@ void blit_marche_perso(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
 			   SDL_BlitSurface(fond,NULL,ecran,&pos);
 			   if(p->pos.x>10)   p->pos.x=p->pos.x-10;
 	    		   SDL_BlitSurface(p->marche_arr[i],NULL,ecran,&p->pos);
+                           SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
                            SDL_Flip(ecran);
 	                }
 		     }
-    //SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
+    //SDL_BlitSurface(v->vi[v->num-1],NULL,ecran,&v->pos);
 }
 void blit_cacher(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
 {
@@ -156,6 +159,7 @@ void blit_cacher(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    {  
       SDL_BlitSurface(fond,NULL,ecran,&pos);
       SDL_BlitSurface(p->cacher[i],NULL,ecran,&p->pos);
+      SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
       SDL_Flip(ecran);
    }		      
 }
@@ -170,6 +174,7 @@ void blit_plus_cacher(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    {  
       SDL_BlitSurface(fond,NULL,ecran,&pos);
       SDL_BlitSurface(p->cacher[i],NULL,ecran,&p->pos);
+      SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
       SDL_Flip(ecran);
    }
 }
@@ -186,6 +191,7 @@ if(p->devant==1)
    {  
       SDL_BlitSurface(fond,NULL,ecran,&pos);
       SDL_BlitSurface(p->attaque_droite[i],NULL,ecran,&p->pos);
+      SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
       SDL_Flip(ecran);
    }
 }
@@ -195,6 +201,7 @@ if(p->arriere==1)
    {  
       SDL_BlitSurface(fond,NULL,ecran,&pos);
       SDL_BlitSurface(p->attaque_gauche[i],NULL,ecran,&p->pos);
+      SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
       SDL_Flip(ecran);
    }
 }
@@ -213,6 +220,7 @@ if(p->devant==1)
    {  
       SDL_BlitSurface(fond,NULL,ecran,&pos);
       SDL_BlitSurface(p->attaque_droite[i],NULL,ecran,&p->pos);
+      SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
       SDL_Flip(ecran);
    }
 }
@@ -222,6 +230,7 @@ if(p->arriere==1)
    {  
       SDL_BlitSurface(fond,NULL,ecran,&pos);
       SDL_BlitSurface(p->attaque_gauche[i],NULL,ecran,&p->pos);
+      SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
       SDL_Flip(ecran);
    }
 }
@@ -236,6 +245,7 @@ void deplacer_attaque(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    p->pos.x=p->pos.x+10;
    SDL_BlitSurface(fond,NULL,ecran,&pos);
    SDL_BlitSurface(p->attaque_droite[7],NULL,ecran,&p->pos);
+   SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
    SDL_Flip(ecran);
    }
   
@@ -244,6 +254,7 @@ void deplacer_attaque(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    p->pos.x=p->pos.x-10;
    SDL_BlitSurface(fond,NULL,ecran,&pos);
    SDL_BlitSurface(p->attaque_gauche[7],NULL,ecran,&p->pos);
+   SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
    SDL_Flip(ecran);
    }
 }
@@ -259,6 +270,7 @@ if(p->devant==1)
    {  
       SDL_BlitSurface(fond,NULL,ecran,&pos);
       SDL_BlitSurface(p->attaque_droite[i],NULL,ecran,&p->pos);
+      SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
       SDL_Flip(ecran);
    }
 }
@@ -318,10 +330,10 @@ void free_perso(perso *p,vie *v)
    }
      /* SDL_FreeSurface(p->saut_dev[i]);
       SDL_FreeSurface(p->saut_arr[i]);
-   }
-   for(i=0;i<10;i++)
+   }*/
+   for(i=0;i<5;i++)
    {
       SDL_FreeSurface(v->vi[i]);
-   }*/
+   }
    
 }

@@ -21,7 +21,7 @@ Mix_Chunk son_marche;
 typedef struct
 {
 int num;
-SDL_Surface *vi[10];
+SDL_Surface *vi[5];
 SDL_Rect pos;
 Mix_Chunk perdu;
 Mix_Chunk blesse;
