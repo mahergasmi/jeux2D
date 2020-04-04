@@ -11,6 +11,7 @@ int main(int arg,char *argc)
    vie v;
 SDL_Surface *ecran=NULL,*fond=NULL;
 SDL_Init(SDL_INIT_VIDEO);
+TTF_Init();
    SDL_Event event;
    int continuer=1;
    init_perso(&p,&v);

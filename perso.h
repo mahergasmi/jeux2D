@@ -2,10 +2,11 @@
 #define PERSO_H_INCLUDED
 #include<SDL/SDL.h>
 #include<SDL/SDL_mixer.h>
+#include<SDL/SDL_ttf.h>
 
 typedef struct
 {
-int devant,arriere,num,num_saut,cache,attaquer;
+int devant,arriere,num,num_saut,cache,attaquer,score;
 SDL_Surface *we9ef;
 SDL_Surface *marche_dev[10];
 SDL_Surface *saut_dev[10];
@@ -14,7 +15,9 @@ SDL_Surface *saut_arr[10];
 SDL_Surface *cacher[7];
 SDL_Surface *attaque_droite[27];
 SDL_Surface *attaque_gauche[13];
-SDL_Rect pos;
+SDL_Surface *texte;
+TTF_Font *police;
+SDL_Rect pos,posscore;
 Mix_Chunk son_marche;
 }perso;
 
