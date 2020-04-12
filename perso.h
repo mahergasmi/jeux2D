@@ -7,6 +7,8 @@
 typedef struct
 {
 int devant,arriere, cache,attaquer,score;
+SDL_Rect pos;
+SDL_Rect posscore;
 SDL_Surface *debout;
 SDL_Surface *marche_dev[10];
 SDL_Surface *marche_arr[10];
@@ -15,7 +17,6 @@ SDL_Surface *attaque_droite[27];
 SDL_Surface *attaque_gauche[8];
 SDL_Surface *texte;
 TTF_Font *police;
-SDL_Rect pos,posscore;
 }perso;
 
 typedef struct
@@ -42,6 +43,3 @@ void free_perso(perso *p,vie *v);
 
 
 #endif
-
-
-

@@ -61,7 +61,6 @@ void load_perso(perso *p,vie *v)
 	    sprintf(nom_image,"md%d.png",i+1);
 	    p->marche_dev[i]=IMG_Load(nom_image);
 	}
-
    for(i=0;i<9;i++)
 	{   
 	    sprintf(nom_image,"ma%d.png",i+1);
@@ -82,8 +81,6 @@ void load_perso(perso *p,vie *v)
 	    sprintf(nom_image,"attaqueg%d.png",i+1);
 	    p->attaque_gauche[i]=IMG_Load(nom_image);
 	}
-
-
    for(i=0;i<5;i++)
 	{
 	    sprintf(nom_image,"vie%d.png",i+1);
@@ -249,6 +246,7 @@ if(p->devant==1)
       SDL_Flip(ecran);
    }
 }
+}
 
 void deplacer_attaque(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
 {
@@ -280,7 +278,7 @@ void free_perso(perso *p,vie *v)
    int i;
    TTF_CloseFont(p->police);
    TTF_Quit();
-   for(i=0;i<p->num;i++)
+   for(i=0;i<9;i++)
    {
       SDL_FreeSurface(p->marche_dev[i]);
       SDL_FreeSurface(p->marche_arr[i]);
