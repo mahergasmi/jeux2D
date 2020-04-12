@@ -9,19 +9,19 @@ int main(int arg,char *argc)
 {
    perso p;
    vie v;
-SDL_Surface *ecran=NULL,*fond=NULL;
-SDL_Init(SDL_INIT_VIDEO);
-TTF_Init();
+   SDL_Surface *ecran=NULL,*fond=NULL;
+   SDL_Init(SDL_INIT_VIDEO);
+   TTF_Init();
    SDL_Event event;
    int continuer=1;
    init_perso(&p,&v);
-ecran=SDL_SetVideoMode(1300,600,32,SDL_HWSURFACE||SDL_DOUBLEBUF);
+   ecran=SDL_SetVideoMode(1300,600,32,SDL_HWSURFACE||SDL_DOUBLEBUF);
    fond=IMG_Load("background.png");//ce backround est juste pour tester le travail et il sera changer au cours de l'integration par le vrai backround qui bouge
    load_perso(&p,&v);
    while(continuer)
    {  
       if((p.cache==0)&&(p.attaquer==0)) 
-         blit_we9ef(ecran,fond,&p,&v);
+         blit_debout(ecran,fond,&p,&v);
       SDL_PollEvent(&event);
       switch(event.type)
       {
@@ -32,10 +32,6 @@ ecran=SDL_SetVideoMode(1300,600,32,SDL_HWSURFACE||SDL_DOUBLEBUF);
          case SDL_KEYDOWN:
                              switch(event.key.keysym.sym)
                              {
-
-			         /*case SDLK_UP:  
-						blit_saut_perso(ecran,fond,&p,&v);
-						break;*/
 
 			         case SDLK_RIGHT:
 						   if(p.cache==1)
