@@ -6,6 +6,7 @@
 #include<SDL/SDL_ttf.h>
 #include<SDL/SDL_mixer.h>
 #include "perso.h"
+#include"scrolling.h"
 
 void init_perso(perso *p,vie *v)
 {
@@ -15,7 +16,7 @@ void init_perso(perso *p,vie *v)
    p->cache=0;
    p->attaquer=0;
    p->pos.x=0;
-   p->pos.y=400;
+   p->pos.y=450;
    v->num=0;//ce compteur va augmenter lorsque le personnage sera blessé (v->num)++ pour afficher l'image de la vie quand elle diminue
    v->pos.x=0;
    v->pos.y=0;
@@ -91,12 +92,12 @@ void load_perso(perso *p,vie *v)
    p->texte=TTF_RenderText_Blended(p->police,ch,couleur);
 }
 
-void blit_debout(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
+void blit_debout(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v)
 {
    SDL_Rect pos;
    pos.x=0;
    pos.y=0;
-   SDL_BlitSurface(fond,NULL,ecran,&pos);
+   SDL_BlitSurface(fond,&camera,ecran,&pos);
    if(p->devant==1)
          p->debout=IMG_Load("we9ef.png");
    if(p->arriere==1)
@@ -106,7 +107,7 @@ void blit_debout(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
    SDL_Flip(ecran);
 }
-void blit_marche_perso(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
+void blit_marche_perso(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v)
 {
    int i;
    SDL_Rect pos;
@@ -115,7 +116,7 @@ void blit_marche_perso(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    if(p->devant==1) {
 		      for(i=0;i<9;i++)
 	                {  
-			   SDL_BlitSurface(fond,NULL,ecran,&pos);
+			   SDL_BlitSurface(fond,&camera,ecran,&pos);
 			   if(p->pos.x<590)  p->pos.x=p->pos.x+10;
 	    		   SDL_BlitSurface(p->marche_dev[i],NULL,ecran,&p->pos);
                            SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
@@ -127,7 +128,7 @@ void blit_marche_perso(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    if(p->arriere==1) {
 		      for(i=0;i<9;i++)
 	                {
-			   SDL_BlitSurface(fond,NULL,ecran,&pos);
+			   SDL_BlitSurface(fond,&camera,ecran,&pos);
 			   if(p->pos.x>10)   p->pos.x=p->pos.x-10;
 	    		   SDL_BlitSurface(p->marche_arr[i],NULL,ecran,&p->pos);
                            SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
@@ -136,7 +137,7 @@ void blit_marche_perso(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
 	                }
 		     }
 }
-void blit_cacher(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
+void blit_cacher(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v)
 {
    int i;
    SDL_Rect pos;
@@ -144,7 +145,7 @@ void blit_cacher(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    pos.y=0;
    for(i=0;i<7;i++)
    {  
-      SDL_BlitSurface(fond,NULL,ecran,&pos);
+      SDL_BlitSurface(fond,&camera,ecran,&pos);
       SDL_BlitSurface(p->cacher[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
@@ -152,7 +153,7 @@ void blit_cacher(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    }		      
 }
 
-void blit_plus_cacher(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
+void blit_plus_cacher(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v)
 {
    int i;
    SDL_Rect pos;
@@ -160,7 +161,7 @@ void blit_plus_cacher(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    pos.y=0;
    for(i=6;i>=0;i--)
    {  
-      SDL_BlitSurface(fond,NULL,ecran,&pos);
+      SDL_BlitSurface(fond,&camera,ecran,&pos);
       SDL_BlitSurface(p->cacher[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
@@ -168,7 +169,7 @@ void blit_plus_cacher(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
    }
 }
 
-void charger_attaque(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
+void charger_attaque(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v)
 {
    int i;
    SDL_Rect pos;
@@ -178,7 +179,7 @@ if(p->devant==1)
 {
    for(i=0;i<8;i++)
    {  
-      SDL_BlitSurface(fond,NULL,ecran,&pos);
+      SDL_BlitSurface(fond,&camera,ecran,&pos);
       SDL_BlitSurface(p->attaque_droite[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
@@ -189,7 +190,7 @@ if(p->arriere==1)
 {
    for(i=0;i<8;i++)
    {  
-      SDL_BlitSurface(fond,NULL,ecran,&pos);
+      SDL_BlitSurface(fond,&camera,ecran,&pos);
       SDL_BlitSurface(p->attaque_gauche[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
@@ -199,7 +200,7 @@ if(p->arriere==1)
 
 }
 
-void decharger_attaque(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
+void decharger_attaque(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v)
 {
    int i;
    SDL_Rect pos;
@@ -209,7 +210,7 @@ if(p->devant==1)
 {
    for(i=7;i>=0;i--)
    {  
-      SDL_BlitSurface(fond,NULL,ecran,&pos);
+      SDL_BlitSurface(fond,&camera,ecran,&pos);
       SDL_BlitSurface(p->attaque_droite[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
@@ -220,7 +221,7 @@ if(p->arriere==1)
 {
    for(i=7;i>=0;i--)
    {  
-      SDL_BlitSurface(fond,NULL,ecran,&pos);
+      SDL_BlitSurface(fond,&camera,ecran,&pos);
       SDL_BlitSurface(p->attaque_gauche[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
@@ -229,7 +230,7 @@ if(p->arriere==1)
 }
 }
 
-void blit_attaquer(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
+void blit_attaquer(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v)
 {
    int i;
    SDL_Rect pos;
@@ -239,7 +240,7 @@ if(p->devant==1)
 {
    for(i=8;i<27;i++)
    {  
-      SDL_BlitSurface(fond,NULL,ecran,&pos);
+      SDL_BlitSurface(fond,&camera,ecran,&pos);
       SDL_BlitSurface(p->attaque_droite[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
@@ -248,15 +249,15 @@ if(p->devant==1)
 }
 }
 
-void deplacer_attaque(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
+void deplacer_attaque(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v)
 {
    SDL_Rect pos;
    pos.x=0;
    pos.y=0;
    if(p->devant==1)
    {
-   p->pos.x=p->pos.x+10;
-   SDL_BlitSurface(fond,NULL,ecran,&pos);
+   if(p->pos.x<590) p->pos.x=p->pos.x+10;
+   SDL_BlitSurface(fond,&camera,ecran,&pos);
    SDL_BlitSurface(p->attaque_droite[7],NULL,ecran,&p->pos);
    SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
    SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
@@ -265,13 +266,79 @@ void deplacer_attaque(SDL_Surface *ecran,SDL_Surface *fond,perso *p,vie *v)
   
    if(p->arriere==1)
    {
-   p->pos.x=p->pos.x-10;
-   SDL_BlitSurface(fond,NULL,ecran,&pos);
+   if(p->pos.x>10) p->pos.x=p->pos.x-10;
+   SDL_BlitSurface(fond,&camera,ecran,&pos);
    SDL_BlitSurface(p->attaque_gauche[7],NULL,ecran,&p->pos);
    SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
    SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
    SDL_Flip(ecran);
    }
+}
+void animer_deplacer_perso(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v,int d,int g,int b,int a,int espace)
+{
+   if(d==1)  {
+                           if(p->cache==1)
+			   blit_plus_cacher(ecran,camera,fond,p,v);
+                           if(p->attaquer==1)
+			   {
+                               if((p->devant==0)&&(p->arriere==1))
+                               {
+                                  p->devant=1;p->arriere=0;
+                                  charger_attaque(ecran,camera,fond,p,v);
+                               }
+
+                               p->devant=1;p->arriere=0;
+                               deplacer_attaque(ecran,camera,fond,p,v);
+                              
+			   }else
+				{
+				   p->devant=1;p->arriere=0;p->cache=0;p->attaquer=0;
+				   blit_marche_perso(ecran,camera,fond,p,v);
+			        }
+             }
+
+   if(g==1)   {
+                           if(p->cache==1)
+			   blit_plus_cacher(ecran,camera,fond,p,v);
+                           if(p->attaquer==1)
+			   {
+                               if((p->devant==1)&&(p->arriere==0))
+                               {
+                                  p->devant=0;p->arriere=1;
+                                  charger_attaque(ecran,camera,fond,p,v);
+                               }
+                               p->devant=0;p->arriere=1;
+                               deplacer_attaque(ecran,camera,fond,p,v);
+                               
+			   }else
+				{
+				   p->arriere=1;p->devant=0;p->cache=0;p->attaquer=0;
+				   blit_marche_perso(ecran,camera,fond,p,v);
+			        }
+               }
+
+   if(b==1)   {
+		p->cache=1;p->attaquer=0;
+		blit_cacher(ecran,camera,fond,p,v);
+              }
+
+   if(a==1)   {
+		if(p->attaquer==1)
+		{
+		decharger_attaque(ecran,camera,fond,p,v);
+		p->attaquer=0;p->cache=0;
+		}else
+		{ 
+		charger_attaque(ecran,camera,fond,p,v);
+		p->attaquer=1;p->cache=0;
+		}
+              }
+
+   if(espace==1)   {
+		      if(p->attaquer==1)
+		      blit_attaquer(ecran,camera,fond,p,v);
+                   }
+
 }
 void free_perso(perso *p,vie *v)
 {
