@@ -3,6 +3,7 @@
 #include<SDL/SDL.h>
 #include<SDL/SDL_mixer.h>
 #include<SDL/SDL_ttf.h>
+#include"ennemi.h"
 
 typedef struct
 {
@@ -29,19 +30,15 @@ SDL_Rect pos;
 
 void init_perso(perso *p,vie *v);
 void load_perso(perso *p,vie *v);
-void blit_debout(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v);
-void blit_marche_perso(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v);
-void blit_cacher(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v);
-void blit_plus_cacher(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v);
-void charger_attaque(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v);
-void deplacer_attaque(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v);
-void decharger_attaque(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v);
-void blit_attaquer(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v);
-void animer_deplacer_perso(SDL_Surface *ecran,SDL_Rect camera,SDL_Surface *fond,perso *p,vie *v,int d,int g,int b,int a,int espace);
+void blit_debout(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,ennemi *enn);
+void blit_marche_perso(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,int d,int g,ennemi *enn);
+void blit_cacher(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,ennemi *enn);
+void blit_plus_cacher(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,ennemi *enn);
+void charger_attaque(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,ennemi *enn);
+void deplacer_attaque(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,int d,int g,ennemi *enn);
+void decharger_attaque(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,ennemi *enn);
+void blit_attaquer(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,ennemi *enn);
+void animation_jeu(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,int d,int g,int b,int a,int espace,ennemi *enn);
 void free_perso(perso *p,vie *v);
-
-
-
-
 
 #endif
