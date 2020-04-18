@@ -106,7 +106,7 @@ if((p->attaquer==0)&&(p->cache==0))
    SDL_BlitSurface(p->debout,NULL,ecran,&p->pos);
    SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
    SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-   if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+   if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
    SDL_Flip(ecran);
 }else {
 if(p->cache==1) {
@@ -114,7 +114,7 @@ if(p->cache==1) {
 		   SDL_BlitSurface(p->cacher[6],NULL,ecran,&p->pos);
 	           SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
     		   SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-     		   if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+     		   if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
     		   SDL_Flip(ecran);
                 }
                      
@@ -126,7 +126,7 @@ if(p->attaquer==1)
 	SDL_BlitSurface(p->attaque_droite[7],NULL,ecran,&p->pos);
 	SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
         SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-        if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+        if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
         SDL_Flip(ecran);
         }
 	if(p->arriere==1)
@@ -135,7 +135,7 @@ if(p->attaquer==1)
 	SDL_BlitSurface(p->attaque_gauche[7],NULL,ecran,&p->pos);
 	SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
         SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-        if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+        if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
         SDL_Flip(ecran);
         }
       }
@@ -158,7 +158,7 @@ void blit_marche_perso(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,per
 	    		   SDL_BlitSurface(p->marche_dev[i],NULL,ecran,&p->pos);
                            SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
 			   SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-                           if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+                           if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
                            SDL_Flip(ecran);
 	                }
 		      }
@@ -174,7 +174,7 @@ void blit_marche_perso(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,per
 	    		   SDL_BlitSurface(p->marche_arr[i],NULL,ecran,&p->pos);
                            SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
                            SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-			   if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+			   if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
                            SDL_Flip(ecran);
 	                }
 		     }
@@ -188,7 +188,7 @@ void blit_cacher(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,
       SDL_BlitSurface(p->cacher[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-      if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+      if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
       SDL_Flip(ecran);
    }		      
 }
@@ -202,7 +202,7 @@ void blit_plus_cacher(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,pers
       SDL_BlitSurface(p->cacher[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-      if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+      if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
       SDL_Flip(ecran);
    }
 }
@@ -218,7 +218,7 @@ if(p->devant==1)
       SDL_BlitSurface(p->attaque_droite[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-      if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+      if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
       SDL_Flip(ecran);
    }
 }
@@ -230,7 +230,7 @@ if(p->arriere==1)
       SDL_BlitSurface(p->attaque_gauche[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-      if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+      if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
       SDL_Flip(ecran);
    }
 }
@@ -248,7 +248,7 @@ if(p->devant==1)
       SDL_BlitSurface(p->attaque_droite[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-      if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+      if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
       SDL_Flip(ecran);
    }
 }
@@ -260,7 +260,7 @@ if(p->arriere==1)
       SDL_BlitSurface(p->attaque_gauche[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-      if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+      if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
       SDL_Flip(ecran);
    }
 }
@@ -269,6 +269,8 @@ if(p->arriere==1)
 void blit_attaquer(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,perso *p,vie *v,ennemi *enn)
 {
    int i;
+   SDL_Color couleur={0,255,0};
+   char ch[10];
 if(p->devant==1)
 {
    for(i=8;i<27;i++)
@@ -277,12 +279,14 @@ if(p->devant==1)
       SDL_BlitSurface(p->attaque_droite[i],NULL,ecran,&p->pos);
       SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
       SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-      if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+      if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
       
-      if((collision_attaque(p,enn)==1)&&(i>22))
+      if((collision_attaque(p,enn)==1)&&(i>=10)&&(enn->mort==0))
                                      {
                                         enn->aff=0;
 					enn->mort=1;
+                                        p->score+=30;sprintf(ch,"Score: %d",p->score);
+                                        p->texte=TTF_RenderText_Blended(p->police,ch,couleur);
 				     }
 
       SDL_Flip(ecran);
@@ -305,7 +309,7 @@ void deplacer_attaque(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,pers
    SDL_BlitSurface(p->attaque_droite[7],NULL,ecran,&p->pos);
    SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
    SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-   if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+   if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
    SDL_Flip(ecran);
    }
   
@@ -319,7 +323,7 @@ void deplacer_attaque(SDL_Surface *ecran,SDL_Rect *camera,SDL_Surface *fond,pers
    SDL_BlitSurface(p->attaque_gauche[7],NULL,ecran,&p->pos);
    SDL_BlitSurface(p->texte,NULL,ecran,&p->posscore);
    SDL_BlitSurface(v->vi[v->num],NULL,ecran,&v->pos);
-   if(((camera->x)>1600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
+   if(((camera->x)>600)||(enn->aff==1)) animer_ennemi(ecran,fond,camera,enn);
    SDL_Flip(ecran);
    }
 }
